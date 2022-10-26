@@ -6,7 +6,7 @@ from googleapiclient.discovery import build
 import datetime
 import time
 
-api_keys = 'AIzaSyCORgFgWCwj0VyLo5Erd8Z6od7LwNYxWXQ'
+api_keys = ''
 youtube = build('youtube', 'v3', developerKey=api_keys)
 
 # start time
