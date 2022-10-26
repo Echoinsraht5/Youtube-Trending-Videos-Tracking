@@ -7034,7 +7034,7 @@ df = pd.concat([df,df90])
 total = str('总计:' + str((df['视频标题'].count())))
 # print(total)
 df.loc[total,:]=['','','','','','','','','']
-path = os.path.abspath('G:/Branche/TVT CODE/row_data')
+path = os.path.abspath('')
 df.to_csv(path+ '/'+ year+ '-'+ month+'-' +day +'.csv', encoding='utf_8_sig')
 
 print(f'运行完成')
