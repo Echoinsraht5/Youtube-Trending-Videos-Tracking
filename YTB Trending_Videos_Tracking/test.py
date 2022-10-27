@@ -6,16 +6,16 @@ from googleapiclient.discovery import build
 import datetime
 import time
 
-api_keys = ''
+api_keys = 'AIzaSyCORgFgWCwj0VyLo5Erd8Z6od7LwNYxWXQ'
 youtube = build('youtube', 'v3', developerKey=api_keys)
 
-# start time
-t1 = datetime.datetime.now()
-print("now >> {}".format(t1))
+# start time #1
+t11 = datetime.datetime.now()
+print("track_start >> {}".format(t11))
 year = str(time.strftime('%Y', time.localtime()))
 month = str(time.strftime('%m', time.localtime()))
 day = str(time.strftime('%d', time.localtime()))
-t = [year,month,day]
+#t11 = [year,month,day]
 
 #%%
 hours_pattern = re.compile(r'(\d+)H')
@@ -7027,19 +7027,44 @@ df90 = pd.DataFrame(dict90)
 df = pd.concat([df,df90])
 
 # to csv
-
 # dff = pd.read_csv('AAA.csv')
 # df = pd.concat([df,dff])
 # pd.merge(df, dff, on = '地区', how ='outer')
 total = str('总计:' + str((df['视频标题'].count())))
-# print(total)
 df.loc[total,:]=['','','','','','','','','']
-path = os.path.abspath('')
-df.to_csv(path+ '/'+ year+ '-'+ month+'-' +day +'.csv', encoding='utf_8_sig')
+path = os.path.abspath('G:/Branche/TVT CODE/row_data')
+df.to_csv(path+ '/'+ year+ '-'+ month+'-' +day+ '.csv', encoding='utf_8_sig')
 
-print(f'运行完成')
+print(f'Tracking Complete')
 
-# endtime & runtime
-t2 = datetime.datetime.now()
-print("end >> {}".format(t2))
-print("runtime >> {}".format(t2-t1))
+# (endtime & runtime)#1
+t12 = datetime.datetime.now()
+print("track_end >> {}".format(t12))
+print("track_runtime >> {}".format(t12-t11))
+
+
+
+# start time #2
+t21 = datetime.datetime.now()
+print("clean_start >> {}".format(t21))
+
+dfc = pd.read_csv(path+ '/'+ year+ '-'+ month+'-' +day+ '.csv')
+N = dfc['URL'].count()
+dfc = dfc.drop_duplicates(subset=['URL'],keep=False)
+dfc = dfc.sort_values(by='浏览量', ascending=False)
+dfc.reset_index(drop = False, inplace=True)
+dfc.rename(columns={'index': '总览index','Unnamed: 0':'地区index'}, inplace=True)
+pst = dfc['视频标题'].count()/N
+ratio = '{:.2%}'.format(pst)
+
+# to csv
+dfc.iloc[-1,:]=['去重URL/总计:',str(df['视频标题'].count())+ '/'+ str(N)+ '('+ str(ratio)+ ')','','','','','','','','','']
+dfc.to_csv(path+ '/'+ year+ '-'+ month+'-' +day + 'cleaned'+ '.csv', encoding='utf_8_sig')
+
+print(f'Cleaning Complete')
+
+# (endtime & runtime)#2
+t22 = datetime.datetime.now()
+print("clean_end >> {}".format(t22))
+print("clean_runtime >> {}".format(t22-t21))
+print("TOTAL_RUNTIME >> {}".format(t22-t11))
