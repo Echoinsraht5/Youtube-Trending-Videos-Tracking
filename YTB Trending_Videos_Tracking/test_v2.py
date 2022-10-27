@@ -7032,8 +7032,8 @@ df = pd.concat([df,df90])
 # pd.merge(df, dff, on = '地区', how ='outer')
 total = str('总计:' + str((df['视频标题'].count())))
 df.loc[total,:]=['','','','','','','','','']
-path = os.path.abspath('G:/Branche/TVT CODE/row_data')
-df.to_csv(path+ '/'+ year+ '-'+ month+'-' +day+ '.csv', encoding='utf_8_sig')
+path = os.path.abspath('')
+df.to_csv('')
 
 print(f'Tracking Complete')
 
@@ -7048,7 +7048,7 @@ print("track_runtime >> {}".format(t12-t11))
 t21 = datetime.datetime.now()
 print("clean_start >> {}".format(t21))
 
-dfc = pd.read_csv(path+ '/'+ year+ '-'+ month+'-' +day+ '.csv')
+dfc = pd.read_csv('')
 N = dfc['URL'].count()
 dfc = dfc.drop_duplicates(subset=['URL'],keep=False)
 dfc = dfc.sort_values(by='浏览量', ascending=False)
@@ -7059,7 +7059,7 @@ ratio = '{:.2%}'.format(pst)
 
 # to csv
 dfc.iloc[-1,:]=['去重URL/总计:',str(df['视频标题'].count())+ '/'+ str(N)+ '('+ str(ratio)+ ')','','','','','','','','','']
-dfc.to_csv(path+ '/'+ year+ '-'+ month+'-' +day + 'cleaned'+ '.csv', encoding='utf_8_sig')
+dfc.to_csv('')
 
 print(f'Cleaning Complete')
 
