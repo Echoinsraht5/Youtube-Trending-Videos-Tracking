@@ -7055,11 +7055,12 @@ dfc = dfc.drop_duplicates(subset=['URL'],keep=False)
 dfc = dfc.sort_values(by='浏览量', ascending=False)
 dfc.reset_index(drop = False, inplace=True)
 dfc.rename(columns={'index': '总览index','Unnamed: 0':'地区index'}, inplace=True)
-pst = dfc['视频标题'].count()/N
+n = dfc['视频标题'].count()
+pst = n/N
 ratio = '{:.2%}'.format(pst)
 
 # to csv
-dfc.iloc[-1,:]=['去重URL/总计:',str(df['视频标题'].count())+ '/'+ str(N)+ '('+ str(ratio)+ ')','','','','','','','','','']
+dfc.iloc[-1,:]=['去重URL/总计:',str(n)+ '/'+ str(N)+ '('+ str(ratio)+ ')','','','','','','','','','']
 dfc.to_csv('')
 
 print(f'Cleaning Complete')
