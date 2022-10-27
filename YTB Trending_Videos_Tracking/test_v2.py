@@ -7041,6 +7041,7 @@ print(f'Tracking Complete')
 t12 = datetime.datetime.now()
 print("track_end >> {}".format(t12))
 print("track_runtime >> {}".format(t12-t11))
+print()
 
 
 
@@ -7067,4 +7068,6 @@ print(f'Cleaning Complete')
 t22 = datetime.datetime.now()
 print("clean_end >> {}".format(t22))
 print("clean_runtime >> {}".format(t22-t21))
+print()
 print("TOTAL_RUNTIME >> {}".format(t22-t11))
+
